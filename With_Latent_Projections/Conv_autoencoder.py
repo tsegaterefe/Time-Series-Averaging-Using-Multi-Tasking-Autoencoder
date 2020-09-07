@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as npy
 import os
 import time
-import DTW as mypair
+#import DTW as mypair
 import scipy as math
 from keras.models import Sequential
 from keras.models import Model
