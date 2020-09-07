@@ -270,20 +270,3 @@ class DTW:
     def calcpair_corre(self):
         coff=self.Warpedfv.dot(self.Warpedsv)
         return [coff, self.warpedsv]
-    '''def show_aligned(self):
-        get_ipython().run_line_magic('matplotlib', 'qt')
-        plt.figure()
-        plt.plot(self.Warpedfv,color='red',label='vector1')
-        plt.plot(self.Warpedsv,color='blue',label='vecotr2')
-        plt.xlabel('Sample Number'),plt.ylabel('Attribute Value')
-        plt.title('Alignement plot of streached sequences'),plt.grid(axis='both')
-        plt.legend()
-        plt.show()
-        plt.figure()
-        plt.plot(self.FirstVector_,color='red')
-        plt.plot(self.SecondVector_,color='blue')
-        plt.xlabel('Sample Number'),plt.ylabel('Attribute Value')
-        plt.title('Association plot of orgnial series'),plt.grid(axis='both')
-        for elem in self.WarpingPath_:
-            plt.plot((elem[1],elem[0]),(self.FirstVector_[elem[1]],self.SecondVector_[elem[0]]),color='gray')
-        plt.show()'''
