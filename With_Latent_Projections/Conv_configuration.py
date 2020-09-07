@@ -3,6 +3,9 @@
 @author: Tsegamlak Terefe
 """
 """
+The conv_autoencoder_main script utilizes the configuration parameters set in this script:
+The main file executes the model for five L2 regularization setups as described in the paper. 
+
 The configuration parameters are described as follows:
     encoder_node_size-> The dimension of the latent space
     Input_activ -> Input layer activation
