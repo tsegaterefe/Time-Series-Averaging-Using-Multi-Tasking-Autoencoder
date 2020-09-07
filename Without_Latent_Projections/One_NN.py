@@ -4,16 +4,15 @@ Created on Tue Jul  2 08:18:44 2019
 
 @author: Tsega
 """
-import DTW as mypair
+#import DTW as mypair
 import numpy as npy
 import seaborn as sn
 import pandas as pd
-import matplotlib.pyplot as plt
 import os
-from IPython import get_ipython
 import scipy as mycalc
 import scipy as math
 from sklearn.decomposition import PCA
+from tslearn import metrics
 class One_NN:
     get_ipython().run_line_magic('matplotlib','qt')
     mytestseries=npy.array
@@ -69,14 +68,15 @@ class One_NN:
       print('zero indexed target class:',self.zero_indexed_traget_class)
       print('number of different classes:',self.class_distance.shape[1])
       print('Size of confusion matrix:',self.confusion_matrix.shape[0])
+    #if problems are encountered tslearn we have provided implmentation of DTW. Uncomment the lines of codes to acivate the DTW script
     def classify_DTW(self):
         correct_count=0
         for i in range(self.mytestseries.shape[0]):
             for j in range(self.class_distance.shape[1]):
-                align=mypair.DTW(self.mytestseries[i,:],self.myclassavgs[j,:])
-                align.calcglobalcost_UDTW()
-                align.findwarppath()
-                self.class_distance[0,j]=math.sqrt(sum(math.square(align.Warpedfv-align.Warpedsv)))
+                #align=mypair.DTW(self.mytestseries[i,:],self.myclassavgs[j,:])
+                #align.calcglobalcost_UDTW()
+                #align.findwarppath()
+                self.class_distance[0,j]=metrics.dtw(self.mytestseries[i,:],self.myclassavgs[j,:])#math.sqrt(sum(math.square(align.Warpedfv-align.Warpedsv)))
             classified_as=list(self.class_distance[0]).index(min(self.class_distance[0]))
             print('distance from each classes:',self.class_distance)
             if classified_as==self.zero_indexed_traget_class[i]:
@@ -124,63 +124,3 @@ class One_NN:
                         print('Data:',i,' target:',self.zero_indexed_traget_class[i],' classified as:',classified_as)
                         self.confusion_matrix[self.zero_indexed_traget_class[i],classified_as]+=1
             prevdistance=-1
-    def display_results(self):
-         data_frame=pd.DataFrame(self.confusion_matrix,range(1,self.confusion_matrix.shape[0]+1),
-                                 range(1,self.confusion_matrix.shape[0]+1))
-         plt.figure()
-         sn.set(font_scale=1.4)
-         plt.title('Confusion matrix \n'+'Total data sets:'+str(self.mytestseries.shape[0])+
-                   '\n'+'Number of series in each class:'+str(self.countof_classmember))
-         sn.heatmap(data_frame, annot=True,annot_kws={"size": 16},fmt='g')
-    def disp_compressed_dim(self,size,name,ed,td,args):
-        plt.figure()
-        temps=npy.zeros((1,args[1].shape[1]))
-        for i in range(1,len(args)):
-          my_pca=PCA(n_components=2)
-          for j in self.unique_classes:
-              temp1=args[i][args[i][:,0]==j]
-              temps=npy.concatenate((temps,temp1))
-          args[i]=temps[1:,:]
-          temps=npy.concatenate((self.myclassavgs,args[i][0:,1:]))
-          my_pca.fit(temps)
-          temp=my_pca.transform(temps)
-          for k in range(self.myclassavgs.shape[0]):
-              plt.scatter(temp[k,0],temp[k,1],linewidths=20,label='Class '+ str(k+1)+' avg.')
-          temp=temp[self.myclassavgs.shape[0]:,:]
-          for j in range(len(args[0])):
-              if j==0:
-                  start=0
-              end=start+args[0][j]-1
-              plt.scatter(temp[start:end+1,0],temp[start:end+1,1],label='Class'+str(j+1)+'='+str(end-start+1)+' data sets')
-              start=end+1          
-          plt.xlabel('Dimension 1 (x)')
-          plt.ylabel('Dinension 2 (y)')
-          plt.grid(axis='both')
-          plt.grid(axis='both')
-          plt.title('Two dimensional PCA plot of the latent space for '+name+' test data sets\n'+' Encoder dimension='+str(ed)+ '    Time domain dimension='+str(td))
-          plt.legend()
-        plt.show()
-    def disp_compressed_dim2(self,size,name,ed,td,args):
-        plt.figure()
-        temps=npy.zeros((1,args[1].shape[1]))
-        for i in range(1,len(args)):
-          for j in self.unique_classes:
-              temp1=args[i][args[i][:,0]==j]
-              temps=npy.concatenate((temps,temp1))
-          args[i]=temps[1:,:]
-          my_pca=PCA(n_components=2)
-          my_pca.fit(args[i][0:,1:])
-          temp=my_pca.transform(args[i][0:,1:])
-          for j in range(len(args[0])):
-              if j==0:
-                  start=0
-              end=start+args[0][j]-1
-              plt.scatter(temp[start:end+1,0],temp[start:end+1,1],label='Class'+str(j+1)+'='+str(end-start+1)+' data sets')
-              start=end+1          
-          plt.xlabel('Dimension 1 (x)')
-          plt.ylabel('Dinension 2 (y)')
-          plt.grid(axis='both')
-          plt.grid(axis='both')
-          plt.title('Two dimensional PCA plot of the latent space for '+name+' test data sets\n'+' Encoder dimension='+str(ed)+ '    Time domain dimension='+str(td))
-          plt.legend()
-        plt.show()
