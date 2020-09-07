@@ -68,7 +68,7 @@ class One_NN:
       print('zero indexed target class:',self.zero_indexed_traget_class)
       print('number of different classes:',self.class_distance.shape[1])
       print('Size of confusion matrix:',self.confusion_matrix.shape[0])
-    #if problems are encountered tslearn we have provided implmentation of DTW. Uncomment the lines of codes to acivate the DTW script
+    #if problems are encountered with tslearn we have provided implmentation of DTW. Uncomment the lines of codes and the import line to acivate the DTW script.
     def classify_DTW(self):
         correct_count=0
         for i in range(self.mytestseries.shape[0]):
