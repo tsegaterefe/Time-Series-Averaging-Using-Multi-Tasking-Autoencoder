@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as npy
 import os
 import time
-import DTW as mypair
+#import DTW as mypair
 import scipy as math
 from keras.models import Sequential
 from keras.models import Model
@@ -384,13 +384,13 @@ class conv_auto_encoder:
          print('Time taken for training in seconds: ', self.training_time)
     def train_multi_model(self,user_epochs,bathc_size_factor,unique_id=''):   
          checkpath=self.Model_save_path+self.Model_save_name+str(unique_id)
-         cp_store=tf.keras.callbacks.ModelCheckpoint(checkpath,save_weights_only=True,verbose=1)
+         cp_store=ModelCheckpoint(checkpath,save_weights_only=True,verbose=1)
          start_time=time.time()
          calc_valid=int(self.temp.shape[0]*self.validation)
          historys=''
          if calc_valid==0: 
              class_labels=self.data[:,0].reshape((self.data.shape[0],))
-             class_labels=to_categorical(class_labels)
+             class_labels=to_categorical(class_labels,num_classes=len(self.uniques))
              historys=self.mymodel.fit(self.data[:,1:],{"Decoder_output": self.data[:,1:], "Classifier_output": class_labels},epochs=user_epochs,verbose=1,batch_size=int((self.data.shape[0])/bathc_size_factor),callbacks=[cp_store])
              with(open(checkpath+'train_hsitoryconv '+'.txt', 'wb')) as file_pi:
                  pickle.dump(historys.history, file_pi)
@@ -400,9 +400,9 @@ class conv_auto_encoder:
              self.mymodel.save(model_paths+'.h5')
          else:
              class_labels=self.data[:,0].reshape((self.data.shape[0],))
-             class_labels=to_categorical(class_labels)
+             class_labels=to_categorical(class_labels,num_classes=len(self.uniques))
              val_class_labels=self.validation_data[:,0].reshape((self.validation_data.shape[0],))
-             val_class_labels=to_categorical(val_class_labels)
+             val_class_labels=to_categorical(val_class_labels,num_classes=len(self.uniques))
              historys=self.mymodel.fit(self.data[:,1:],{"Decoder_output": self.data[:,1:], "Classifier_output": class_labels},validation_data=(self.validation_data[:,1:],{"Decoder_output": self.validation_data[:,1:], "Classifier_output": val_class_labels}),epochs=user_epochs,verbose=1,batch_size=int((self.data.shape[0])/bathc_size_factor),callbacks=[cp_store])
              with(open(checkpath+'train_hsitoryconv '+'.txt', 'wb')) as file_pi:
                  pickle.dump(historys.history, file_pi)
