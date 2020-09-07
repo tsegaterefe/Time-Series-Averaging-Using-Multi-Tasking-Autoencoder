@@ -387,7 +387,7 @@ class conv_auto_encoder:
          print('Time taken for training in seconds: ', self.training_time)
     def train_multi_model(self,user_epochs,bathc_size_factor,unique_id=''):   
          checkpath=self.Model_save_path+self.Model_save_name+str(unique_id)
-         cp_store=tf.keras.callbacks.ModelCheckpoint(checkpath,save_weights_only=True,verbose=1)
+         cp_store=ModelCheckpoint(checkpath,save_weights_only=True,verbose=1)
          start_time=time.time()
          calc_valid=int(self.temp.shape[0]*self.validation)
          historys=''
@@ -519,21 +519,22 @@ class conv_auto_encoder:
                   tsv_writer = csv.writer(tsv_file, delimiter='\t', lineterminator='\n')
                   tsv_writer.writerow(array[i,:])
     def display_results(self,model):
-        fig,((ax1,ax2),(ax3,ax4))=plt.subplots(2,2)
-        fig.suptitle('Number of data sets'+str(self.data.shape)+' ,'+'Validation data size'+
+        grid = plt.GridSpec(2, 8)
+        plt.subplot(grid[0, 1:6])
+        plt.suptitle('Number of data sets'+str(self.data.shape)+' ,'+'Validation data size'+
                       'Training time in minutes:'+
                      str(self.training_time/60)+' ,'+'Number of classes:'+str(len(self.uniques)))
         hist_dic=self.hist_dict
         if model==0:
-            ax1.plot(range(len(hist_dic['loss'])),hist_dic['loss'],'r',label='Training Loss')
+            plt.plot(range(len(hist_dic['loss'])),hist_dic['loss'],'r',label='Training Loss')
             if self.validation>0:
-                ax1.plot(range(len(hist_dic['val_loss'])),hist_dic['val_loss'],'r',label='Validation Loss')
+                plt.plot(range(len(hist_dic['val_loss'])),hist_dic['val_loss'],'r',label='Validation Loss')
         else:
-            ax1.plot(range(len(hist_dic['Decoder_output_loss'])),hist_dic['Decoder_output_loss'],label='Decoder_output_loss')
-            ax1.plot(range(len(hist_dic['Classifier_output_loss'])),hist_dic['Classifier_output_loss'],label='Classifier_output_loss')
+            plt.plot(range(len(hist_dic['Decoder_output_loss'])),hist_dic['Decoder_output_loss'],label='Decoder_output_loss')
+            plt.plot(range(len(hist_dic['Classifier_output_loss'])),hist_dic['Classifier_output_loss'],label='Classifier_output_loss')
             if self.validation>0:
-                ax1.plot(range(len(hist_dic['val_Decoder_output_loss'])),hist_dic['val_Decoder_output_loss'],label='Validation Decoder_output_loss')
-                ax1.plot(range(len(hist_dic['val_Classifier_output_loss'])),hist_dic['val_Classifier_output_loss'],label='Validation Classifier_output_loss')
+                plt.plot(range(len(hist_dic['val_Decoder_output_loss'])),hist_dic['val_Decoder_output_loss'],label='Validation Decoder_output_loss')
+                plt.plot(range(len(hist_dic['val_Classifier_output_loss'])),hist_dic['val_Classifier_output_loss'],label='Validation Classifier_output_loss')
                 leng=len(hist_dic['val_Decoder_output_loss'])
                 print('Final Validation Loss',hist_dic['val_loss'][leng-1])
                 print('Loss',hist_dic['loss'][leng-1])
@@ -541,20 +542,21 @@ class conv_auto_encoder:
                 print('Decoder_loss',hist_dic['Decoder_output_loss'][leng-1])
                 print('Classifier_val_loss',hist_dic['val_Classifier_output_loss'][leng-1])
                 print('Decoder_val_loss',hist_dic['val_Decoder_output_loss'][leng-1])
-        ax1.grid(axis='both')
-        ax1.legend()
-        ax1.title.set_text('Validation and Training Loss')
+        plt.grid(axis='both')
+        plt.legend()
+        plt.title('Validation and Training Loss')
+        plt.subplot(grid[1, 0:4])
         for k in range(self.data.shape[0]):
-           ax2.plot(self.data[k,1:],'r')
-        ax2.grid(axis='both')
-        ax2.legend()
-        ax2.title.set_text('Data sets')
+           plt.plot(self.data[k,1:],'r')
+        plt.grid(axis='both')
+        plt.legend()
+        plt.title.set_text('Data sets')
+        plt.subplot(grid[1, 4:8])
         for k in range(self.final_estimate.shape[0]):
-            print(k)
-            ax3.plot(self.final_estimate[k,:],label='Average for class '+str(k+1))
-        ax3.grid(axis='both')
-        ax3.legend()
-        ax3.title.set_text('Estimated averages')
+            plt.plot(self.final_estimate[k,:],label='Average for class '+str(k+1))
+        plt.grid(axis='both')
+        plt.legend()
+        plt.title('Estimated averages')
         calc_valid=int(self.validation*self.temp.shape[0])
         my_data=npy.zeros((1,1))
         if calc_valid>0:
