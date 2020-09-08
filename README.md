@@ -4,7 +4,7 @@ The provided scripts are the implmentation for the concepts presented in the pap
 # Abstract:
 <p align="justify">
 The estimation of an optimal time series average has been studied for over three decades. The process is mainly challenging due to temporal distortion. Previous approaches mostly addressed this challenge by using alignment algorithms such as Dynamic Time Warping (DTW). However, the quadratic computational complexity of DTW and its inability to align more than two time series simultaneously complicate the estimation. In this paper, we thus follow a different path and state the averaging problem as a generative problem. To this end, we propose a multi-tasking convolutional autoencoder architecture to extract similar latent features for similarly labeled time series under the influence of temporal distortion. We then take the arithmetic mean of latent features as an estimate of the latent mean. Moreover, we project these estimations and investigate their performance in the time domain.  We evaluate the proposed approach through one nearest centroid classification using 85 data sets obtained from the University of California univariate time series repository. Experimental results show that, in the latent space, the proposed multi-tasking autoencoder achieves competitive accuracies as compared to the state-of-the-art, thus demonstrating that the learned latent space is suitable to compute time series averages. In addition, the time domain projection of latent space means provided superior results as compared to an arithmetic mean.
-
+</p>
 # Demonstration of the Problem:
 ![Demonstration of the Problem](https://raw.githubusercontent.com/tsegaterefe/Time-Series-Averaging-Using-Multi-Tasking-Autoencoder/master/Images/Discription%20of%20the%20Problem.png)
 # Proposed Archtecture: 
@@ -15,7 +15,6 @@ The estimation of an optimal time series average has been studied for over three
 <p align="justify">
 We have provided two versions of our implemenation. If the scripts are to be run on a server whith graphical displays diabled (if displaying plots is not possible), for instance on Google Colab; scripts within the "Without_Latent_Projection" folder can be used. On the contrary, if displaying plots is possible, scripts wihint the "With_Latent_Projection" folder can be used. Before executing the scripts download the univariate time series data sets from the Unversity of California Univariate Time sereis Repository (UCR), whcih can be found at https://www.cs.ucr.edu/%7Eeamonn/time_series_data_2018/UCRArchive_2018.zip. After the extraction of the data sets follow the below steps.
 </p>
-</p>
 * open the "Conv_configuration.py" 
 * Modify "self.File_loc" variable with the location of the UCR data sets. I.e., if location is XXX, then self.File_loc='XXXX/'
 * Modify "self.Model_save_path" with a location that is persumed to be suitable to save data generated while training the network. I.e., if prefered location is XXX, then self.Model_save_path='XXX/'
@@ -23,5 +22,4 @@ We have provided two versions of our implemenation. If the scripts are to be run
 * Use the "Conv_autoencoder_main.py" to procede with network training.
 <p align="justify">
 We have set the main file to execute network training for five different L2 regularization as stated in the papaer. If runing the training for such iteration is not possible for different reason then the training can be executed for a single iteration by changing "self.iterations" variable in "Conv_configuration.py" to one. To furhter modify hyperparameters please refer to the comments in the "Conv_configuration.py" script.
-</p>
 </p>
