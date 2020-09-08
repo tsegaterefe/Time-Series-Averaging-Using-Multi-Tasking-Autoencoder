@@ -7,3 +7,7 @@ The estimation of an optimal time series average has been studied for over three
 
 # Demonstration of the Problem:
 ! [Demonstration of the Problem](https://github.com/tsegaterefe/Time-Series-Averaging-Using-Multi-Tasking-Autoencoder/blob/master/Images/Discription%20of%20the%20Problem.png)
+# Proposed Archtecture: 
+! [Demonstration of Results](https://github.com/tsegaterefe/Time-Series-Averaging-Using-Multi-Tasking-Autoencoder/blob/master/Images/Proposed%20Archtecture.png)
+# Demonstration of Results:
+! [Demonstration of Results](https://github.com/tsegaterefe/Time-Series-Averaging-Using-Multi-Tasking-Autoencoder/blob/master/Images/Demonstration%20of%20results.png)
