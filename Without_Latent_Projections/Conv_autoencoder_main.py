@@ -31,7 +31,7 @@ def main():
             print ("Creation of the directory %s failed" % my_config.Model_save_path+my_config.File_name)
         else:
             print ("Successfully created the directory %s " % my_config.Model_save_path+my_config.File_name)
-        for j in range(5):
+        for j in range(my_config.iterations):
             my_config.Model_save_path=model_save_root
             try:
                 os.mkdir(my_config.Model_save_path+my_config.File_name+'/'+'Trial'+str(j+1))
