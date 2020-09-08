@@ -24,6 +24,8 @@ We have provided two versions of our implemenation. If the scripts are to be run
 * Modify "self.Model_save_path" with a location that is persumed to be suitable to save data generated while training the network. I.e., if prefered location is XXX, then self.Model_save_path='XXX/'
 * Within the folders of the scripts there is a "Dataset_List.csv" file; modify "self.List_of_data_sets" variable in the "Conv_configuration.py" script with the location of the "Dataset_List.csv" file. I.e., if the location of "Dataset_List.csv" is XXX, then self.List_of_data_sets='XXX/'
 * Use the "Conv_autoencoder_main.py" to procede with network training.
+<p align="justify">
 We have set the main file to execute network training for five different L2 regularization as stated in the papaer. If runing the training for such iteration is not possible for different reason then the training can be executed for a single iteration by changing "self.iterations" variable in "Conv_configuration.py" to one. To furhter modify hyperparameters please refer to the comments in the "Conv_configuration.py" script.
+</p>
 </p>
 
