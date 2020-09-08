@@ -41,6 +41,7 @@ class Configurations:
     Cl_L1_reg=0
     Cl_L2_reg=0
     batch_size=1
+    iterations=5
     Epoch=600
     Learning_rate=0.00001
     File_loc=''
@@ -75,6 +76,7 @@ class Configurations:
             self.Cl_L1_reg=0.0
             self.Cl_L2_reg=0.000
             self.batch_size=2
+            self.iterations=5
             self.Epoch=600
             self.Learning_rate=0.0001
             self.File_loc='D:/Deep learning data/UCR_Data_sets/UCRArchive_2018/'
