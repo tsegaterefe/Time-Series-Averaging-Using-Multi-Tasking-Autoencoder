@@ -33,7 +33,7 @@ We have set the main file to execute network training for five different L2 regu
 This research was conducted under the Ethio-France PhD. Program which is financed by:
 </p>
 <ol>  
-<li>The Ethiopian ministery of science and higher Education (MOSHE)</li>
+<li>The Ethiopian Ministery of Science and Higher Education (MOSHE)</li>
 <li>The French Embassy to Ethiopia and African Union.</li>
 </ol>  
 <p align="justify">  
