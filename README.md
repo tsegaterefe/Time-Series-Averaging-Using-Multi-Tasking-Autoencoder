@@ -30,7 +30,7 @@ We have set the main file to execute network training for five different L2 regu
 
 # Research Funding:  
 <p align="justify">
-This research was conducted under the Ethiop France PhD. Program which is financed by:
+This research was conducted under the Ethio-France PhD. Program which is financed by:
 </p>
 <ol>  
 <li>The Ethiopian ministery of science and higher Education (MOSHE)</li>
