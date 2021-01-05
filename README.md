@@ -35,7 +35,7 @@ This research was conducted under the Ethiop France PhD. Program which is financ
 <ol>  
 <il>The Ethiopian ministery of science and higher Education (MOSHE)</li>
 <il>The French Embassy to Ethiopia and African Union.</li>
-<ol>  
+</ol>  
 <p align="justify">  
 We would like to acknowledge both parties for their generous contributions. 
 </p>
