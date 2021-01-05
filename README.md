@@ -27,11 +27,14 @@ We have provided two versions of our implemenation. If the scripts are to be run
 <p align="justify">
 We have set the main file to execute network training for five different L2 regularization setups as stated in the paper. If training the network for such iteration is not possible for different reason; then, the training can be executed for a single iteration by changing "self.iterations" variable in "Conv_configuration.py" to one. To furhter modify hyperparameters please refer to the comments in the "Conv_configuration.py" script.
 </p>
+# Reaserch Fnding:  
 <p align="justify">
-This research was financed by:
-The Ethiopian ministery of science and higher Education (MOSHE) and
-The French Embassy to Ethiopia and African Union. 
-We would like to acknowledge both parties for their generous contribution. 
+This research was conducted under the Ethiop France PhD. Program which is financed by:
+<ul>  
+The Ethiopian ministery of science and higher Education (MOSHE) 
+The French Embassy to Ethiopia and African Union . 
+<ul>  
+We would like to acknowledge both parties for their generous contributions. 
 </p>
 </p>
 
